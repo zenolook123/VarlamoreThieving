@@ -53,7 +53,7 @@ public class WealthyCitizenOverlay extends Overlay {
             // Check the distance and render or remove the NPC accordingly
             if (distance <= 15 * Perspective.LOCAL_TILE_SIZE) {
                 // NPC is within range, render the overlay
-                renderNpcOverlay(graphics, npc, Color.green);
+                renderNpcOverlay(graphics, npc, Color.red);
             } else {
                 // NPC is out of range, remove it from the set of tracked NPCs
                 iterator.remove();
