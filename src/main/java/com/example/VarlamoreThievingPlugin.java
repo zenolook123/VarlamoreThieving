@@ -17,6 +17,7 @@ import net.runelite.client.plugins.PluginDescriptor;
 	name = "Varlamore Thieving"
 )
 public class VarlamoreThievingPlugin extends Plugin
+
 {
 	@Inject
 	private Client client;
@@ -34,15 +35,13 @@ public class VarlamoreThievingPlugin extends Plugin
 	protected void shutDown() throws Exception
 	{
 		log.info("Example stopped!");
+
 	}
 
 	@Subscribe
 	public void onGameStateChanged(GameStateChanged gameStateChanged)
 	{
-		if (gameStateChanged.getGameState() == GameState.LOGGED_IN)
-		{
 			client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "Example says " + config.greeting(), null);
-		}
 	}
 
 	@Provides
