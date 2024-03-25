@@ -71,7 +71,6 @@ public class VarlamoreThievingPlugin extends Plugin {
 		// Example: Check if the chat message contains a specific phrase
 		if (message.contains("You hear someone outside spot the homeowner coming back!")) {
 			notifier.notify("Homeowner spotted!");
-			houseOverlay.highlightWindow();
 		}
 
 		if (message.contains("You feel very tired and can't quite grab as many valuables as you'd like.")) {

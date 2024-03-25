@@ -2,6 +2,7 @@ package com.example.overlay;
 
 import lombok.Setter;
 import net.runelite.api.*;
+import net.runelite.api.Point;
 import net.runelite.client.ui.overlay.Overlay;
 import net.runelite.client.ui.overlay.OverlayLayer;
 import net.runelite.client.ui.overlay.OverlayPosition;
@@ -52,13 +53,13 @@ public class HouseOverlay extends Overlay {
 
                             // Now you can check against the morphId
                             if (morphId == WINDOW_ID_IN || morphId == WINDOW_ID_OUT) {
-                                drawWallObjectBox(graphics, wallObject, morphId == WINDOW_ID_OUT ? Color.yellow : Color.BLUE); // Highlight morphed window
+                                drawHouseBox(graphics, wallObject, morphId == WINDOW_ID_OUT ? Color.yellow : Color.BLUE); // Highlight morphed window
                             }
                         }
                     }
                     int id = wallObject.getId();
                     if (id == DOOR_BEFORE_ID || id == DOOR_AFTER_ID) {
-                        drawWallObjectBox(graphics, wallObject, id == DOOR_BEFORE_ID ? Color.red : Color.green);
+                        drawHouseBox(graphics, wallObject, id == DOOR_BEFORE_ID ? Color.red : Color.green);
                     }
                 }
             }
@@ -67,33 +68,62 @@ public class HouseOverlay extends Overlay {
     }
 
 
-    public void highlightWindow(){
-
-    }
-
-
-
-    private void drawWallObjectBox(Graphics2D graphics, WallObject wallObject, Color color) {
+    private void drawHouseBox(Graphics2D graphics, WallObject wallObject, Color color) {
         Shape polygon = wallObject.getCanvasTilePoly();
         if (polygon != null) {
-            // Set the color for the outline of the box
+            // Drawing the box with the specified color
             graphics.setColor(color);
-
-            // Set the stroke to define the thickness of the outline
             graphics.setStroke(new BasicStroke(2));
-
-            // Draw the outline of the polygon
             graphics.draw(polygon);
-
-            // Create a semi-transparent version of the color for the fill
-            Color fillColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), 50); // 50 is the alpha value
-
-            // Set the color for the fill
+            Color fillColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), 50); // Semi-transparent fill
             graphics.setColor(fillColor);
-
-            // Fill the polygon with the semi-transparent color
             graphics.fill(polygon);
+
+            // Drawing text for red and green colors only
+            if (color.equals(Color.red) || color.equals(Color.green)) {
+                String text = color.equals(Color.green) ? "Away" : "Home";
+
+                graphics.setFont(new Font("Arial", Font.BOLD, 9)); // Set the desired font
+                FontMetrics metrics = graphics.getFontMetrics();
+                int textWidth = metrics.stringWidth(text);
+                int textHeight = metrics.getHeight();
+
+                // Center the text on the polygon
+                Point textLocation = Perspective.getCanvasTextLocation(client, graphics, wallObject.getLocalLocation(), text, 0);
+                if (textLocation != null) {
+                    int x = textLocation.getX() - (textWidth / 2);
+                    int y = textLocation.getY() + (textHeight / 2);
+
+                    // Draw text shadow for better visibility
+                    graphics.setColor(Color.BLACK);
+                    graphics.drawString(text, x + 1, y + 1); // Shadow
+                    graphics.setColor(Color.WHITE);
+                    graphics.drawString(text, x, y); // Actual text
+                }
+            }
+
+            if (color.equals(Color.yellow) || color.equals(Color.blue)) {
+                String text = "Window";
+
+                graphics.setFont(new Font("Arial", Font.BOLD, 9)); // Set the desired font
+                FontMetrics metrics = graphics.getFontMetrics();
+                int textWidth = metrics.stringWidth(text);
+                int textHeight = metrics.getHeight();
+
+                // Center the text on the polygon
+                Point textLocation = Perspective.getCanvasTextLocation(client, graphics, wallObject.getLocalLocation(), text, 0);
+                if (textLocation != null) {
+                    int x = textLocation.getX() - (textWidth / 2);
+                    int y = textLocation.getY() + (textHeight / 2);
+
+                    // Draw text shadow for better visibility
+                    graphics.setColor(Color.BLACK);
+                    graphics.drawString(text, x + 1, y + 1); // Shadow
+                    graphics.setColor(Color.WHITE);
+                    graphics.drawString(text, x, y); // Actual text
+                }
+            }
         }
     }
-
 }
+

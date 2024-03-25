@@ -16,4 +16,6 @@ public interface VarlamoreThievingConfig extends Config
 	{
 		return "Hello";
 	}
+
+
 }
