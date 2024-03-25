@@ -59,7 +59,7 @@ public class WealthyCitizenOverlay extends Overlay {
         LocalPoint playerLocation = client.getLocalPlayer().getLocalLocation();
         LocalPoint npcLocation = npc.getLocalLocation();
         int distance = playerLocation.distanceTo(npcLocation);
-        return distance <= 10 * Perspective.LOCAL_TILE_SIZE;
+        return distance <= 20 * Perspective.LOCAL_TILE_SIZE;
     }
 
     // In your render method or where you're actually drawing the tiles
@@ -90,7 +90,7 @@ public class WealthyCitizenOverlay extends Overlay {
         int distance = playerLocation.distanceTo(npcLocation);
 
         // Check if the NPC is within a certain range
-        if (distance > 10 * Perspective.LOCAL_TILE_SIZE) {
+        if (distance > 20 * Perspective.LOCAL_TILE_SIZE) {
             // NPC is too far away, skip rendering its overlay
             return;
         }

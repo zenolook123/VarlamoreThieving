@@ -10,8 +10,13 @@ import javax.inject.Inject;
 import java.awt.*;
 
 public class HouseOverlay extends Overlay {
-    private static final int DOOR_BEFORE = 51999;
-    private static final int DOOR_AFTER = 51998;
+    private static final int DOOR_BEFORE_ID = 51999;
+    private static final int DOOR_AFTER_ID = 51998;
+
+    private static final int WINDOW_ID_IN = 52000;
+
+    private static final int WINDOW_ID_OUT = 52001;
+
     private final Client client;
 
     @Setter
@@ -37,14 +42,33 @@ public class HouseOverlay extends Overlay {
 
                 WallObject wallObject = tile.getWallObject();
                 if (wallObject != null) {
+                    ObjectComposition comp = client.getObjectDefinition(wallObject.getId());
+
+                    // Check if the object has morph ids
+                    if (comp.getImpostorIds() != null) {
+                        ObjectComposition morphedComp = comp.getImpostor();
+                        if (morphedComp != null) {
+                            int morphId = morphedComp.getId();
+
+                            // Now you can check against the morphId
+                            if (morphId == WINDOW_ID_IN || morphId == WINDOW_ID_OUT) {
+                                drawWallObjectBox(graphics, wallObject, morphId == WINDOW_ID_OUT ? Color.yellow : Color.BLUE); // Highlight morphed window
+                            }
+                        }
+                    }
                     int id = wallObject.getId();
-                    if (id == DOOR_BEFORE || id == DOOR_AFTER) {
-                        drawWallObjectBox(graphics, wallObject, id == DOOR_BEFORE ? Color.red : Color.green);
+                    if (id == DOOR_BEFORE_ID || id == DOOR_AFTER_ID) {
+                        drawWallObjectBox(graphics, wallObject, id == DOOR_BEFORE_ID ? Color.red : Color.green);
                     }
                 }
             }
         }
         return null;
+    }
+
+
+    public void highlightWindow(){
+
     }
 
 

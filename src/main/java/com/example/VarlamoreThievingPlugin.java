@@ -8,7 +8,7 @@ import net.runelite.api.*;
 
 import net.runelite.api.events.ChatMessage;
 import net.runelite.client.config.ConfigManager;
-
+import net.runelite.client.Notifier;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
@@ -28,6 +28,9 @@ public class VarlamoreThievingPlugin extends Plugin {
 
 	@Inject
 	private Client client;
+
+	@Inject
+	private Notifier notifier;
 
 	@Inject
 	private VarlamoreThievingConfig config;
@@ -66,9 +69,17 @@ public class VarlamoreThievingPlugin extends Plugin {
 		String message = chatMessage.getMessage();
 
 		// Example: Check if the chat message contains a specific phrase
-		if (message.contains("specific phrase")) {
-			// Update the overlay color based on the message
-			houseOverlay.setOverlayColor(Color.GREEN); // Assuming houseOverlay is accessible here
+		if (message.contains("You hear someone outside spot the homeowner coming back!")) {
+			notifier.notify("Homeowner spotted!");
+			houseOverlay.highlightWindow();
+		}
+
+		if (message.contains("You feel very tired and can't quite grab as many valuables as you'd like.")) {
+			String adviceMessage = "If you've used more than 5 keys without obtaining a new one, your thieving will be less successful. " +
+					"Pickpocketing another House key from Wealthy citizens will resolve the issue.";
+
+			// Inserting a custom message into the game's chatbox
+			client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", adviceMessage, null);
 		}
 	}
 	private void refreshNpcTracking() {

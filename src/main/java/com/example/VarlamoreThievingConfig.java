@@ -8,9 +8,9 @@ import net.runelite.client.config.ConfigItem;
 public interface VarlamoreThievingConfig extends Config
 {
 	@ConfigItem(
-		keyName = "greeting",
-		name = "Welcome Greeting",
-		description = "The message to show to the user when they login"
+		keyName = "notification",
+		name = "Notification Settings",
+		description = "Enable or Disable Notifications"
 	)
 	default String greeting()
 	{
