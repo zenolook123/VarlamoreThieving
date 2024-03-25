@@ -38,7 +38,7 @@ public class VarlamoreThievingPlugin extends Plugin {
 
 	@Override
 	protected void startUp() throws Exception {
-		log.info("Varlamore Thieving started!");
+		VarlamoreThievingPlugin.log.info("Varlamore Thieving started!");
 		overlayManager.add(wealthyCitizenOverlay);
 		executorService = Executors.newSingleThreadScheduledExecutor();
 		executorService.scheduleAtFixedRate(this::refreshNpcTracking, 0, 1, TimeUnit.SECONDS);
@@ -46,18 +46,12 @@ public class VarlamoreThievingPlugin extends Plugin {
 
 	@Override
 	protected void shutDown() throws Exception {
-		log.info("Varlamore Thieving stopped!");
+		VarlamoreThievingPlugin.log.info("Varlamore Thieving stopped!");
 		overlayManager.remove(wealthyCitizenOverlay);
 		executorService.shutdownNow();
 	}
 
-	@Subscribe
-	public void onNpcSpawned(NpcSpawned npcSpawned) {
-		NPC npc = npcSpawned.getNpc();
-		if (npc.getName() != null && npc.getName().contains(WEALTHY_CITIZEN_NAME)) {
-			wealthyCitizenOverlay.addNpc(npc);
-		}
-	}
+
 	private void refreshNpcTracking() {
 		for (NPC npc : client.getNpcs()) {
 			if (npc.getName() != null && npc.getName().contains(WEALTHY_CITIZEN_NAME)) {
