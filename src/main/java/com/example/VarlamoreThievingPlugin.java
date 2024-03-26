@@ -33,9 +33,6 @@ public class VarlamoreThievingPlugin extends Plugin {
 	private Notifier notifier;
 
 	@Inject
-	private VarlamoreThievingConfig config;
-
-	@Inject
 	private OverlayManager overlayManager;
 
 	@Inject
@@ -47,7 +44,13 @@ public class VarlamoreThievingPlugin extends Plugin {
 	@Inject
 	private ScheduledExecutorService executorService;
 
-	@Override
+	@Inject
+	private VarlamoreThievingConfig config;
+
+
+
+
+    @Override
 	protected void startUp() throws Exception {
 		VarlamoreThievingPlugin.log.info("Varlamore Thieving started!");
 		overlayManager.add(wealthyCitizenOverlay);
@@ -67,12 +70,18 @@ public class VarlamoreThievingPlugin extends Plugin {
 	@Subscribe
 	public void onChatMessage(ChatMessage chatMessage) {
 		String message = chatMessage.getMessage();
+		if (config.enableNotifications()) {
+			// Example: Check if the chat message contains a specific phrase
+			if (message.contains("You hear someone outside spot the homeowner coming back!")) {
+				notifier.notify("Homeowner spotted!");
+			}
 
-		// Example: Check if the chat message contains a specific phrase
-		if (message.contains("You hear someone outside spot the homeowner coming back!")) {
-			notifier.notify("Homeowner spotted!");
+			if (message.contains("You notice an urchin distract a wealthy citizen nearby.")) {
+				notifier.notify("Citizen Distracted!");
+			}
+
 		}
-
+	if (config.enableChatMessages()) {
 		if (message.contains("You feel very tired and can't quite grab as many valuables as you'd like.")) {
 			String adviceMessage = "If you've used more than 5 keys without obtaining a new one, your thieving will be less successful. " +
 					"Pickpocketing another House key from Wealthy citizens will resolve the issue.";
@@ -80,6 +89,8 @@ public class VarlamoreThievingPlugin extends Plugin {
 			// Inserting a custom message into the game's chatbox
 			client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", adviceMessage, null);
 		}
+	}
+
 	}
 	private void refreshNpcTracking() {
 		for (NPC npc : client.getNpcs()) {

@@ -8,14 +8,21 @@ import net.runelite.client.config.ConfigItem;
 public interface VarlamoreThievingConfig extends Config
 {
 	@ConfigItem(
-		keyName = "notification",
-		name = "Notification Settings",
-		description = "Enable or Disable Notifications"
+			keyName = "enableNotifications",
+			name = "Enable Notifications",
+			description = "Configure whether or not notifications should be shown."
 	)
-	default String greeting()
+	default boolean enableNotifications()
 	{
-		return "Hello";
+		return true;
 	}
-
-
+	@ConfigItem(
+			keyName = "enableChatMessages",
+			name = "Enable Chat Messages",
+			description = "Configure whether or not chat messages should be shown."
+	)
+	default boolean enableChatMessages()
+	{
+		return true; // By default, chat messages are enabled.
+	}
 }
