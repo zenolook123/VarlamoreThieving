@@ -19,6 +19,7 @@ import java.util.*;
 
 import javax.inject.Inject;
 import java.awt.*;
+import java.util.List;
 
 public class WealthyCitizenOverlay extends Overlay {
     private final Client client;
@@ -64,14 +65,18 @@ public class WealthyCitizenOverlay extends Overlay {
     // In your render method or where you're actually drawing the tiles
     @Override
     public Dimension render(Graphics2D graphics) {
-        for (Iterator<NPC> it = trackedNpcs.iterator(); it.hasNext(); ) {
-            NPC npc = it.next();
+        List<NPC> toRemove = new ArrayList<>(); // Create a list to hold NPCs that need to be removed
+
+        for (NPC npc : trackedNpcs) { // Use enhanced for loop for readability
             if (isNpcInView(npc)) {
-                it.remove(); // Remove the NPC if it's no longer in view
-                continue;
+                toRemove.add(npc); // Add the NPC to the removal list instead of removing it directly
+            } else {
+                renderNpcOverlay(graphics, npc); // Continue with rendering logic
             }
-            renderNpcOverlay(graphics, npc); // Continue with rendering logic
         }
+
+        trackedNpcs.removeAll(toRemove); // Remove all NPCs that are no longer in view after the iteration
+
         return null;
     }
 

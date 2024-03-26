@@ -80,6 +80,16 @@ public class VarlamoreThievingPlugin extends Plugin {
 				notifier.notify("Citizen Distracted!");
 			}
 
+			if (message.contains("You can't spot anything else worth taking from the jewellery case.")) {
+				notifier.notify("Looting Stopped!");
+			}
+			if (message.contains("You can't spot anything else worth taking from the chest.")) {
+				notifier.notify("Looting Stopped!");
+			}
+			if (message.contains("You can't spot anything else worth taking from the wardrobe.")) {
+				notifier.notify("Looting Stopped!");
+			}
+
 		}
 	if (config.enableChatMessages()) {
 		if (message.contains("You feel very tired and can't quite grab as many valuables as you'd like.")) {
