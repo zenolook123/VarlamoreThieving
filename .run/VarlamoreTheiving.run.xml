@@ -2,8 +2,8 @@
   <configuration default="false" name="VarlamoreTheiving" type="Application" factoryName="Application">
     <option name="ALTERNATIVE_JRE_PATH" value="corretto-11" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-    <option name="MAIN_CLASS_NAME" value="com.example.VarlamoreThieving" />
-    <module name="example.test" />
+    <option name="MAIN_CLASS_NAME" value="com.varlamorethieving.VarlamoreThieving" />
+    <module name="varlamorethieving.test" />
     <selectedOptions>
       <option name="environmentVariables" visible="false" />
     </selectedOptions>

@@ -1,4 +1,21 @@
-package com.example.overlay;
+package com.varlamorethieving.overlay;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics2D;
+import java.awt.Polygon;
+import java.time.Duration;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.inject.Inject;
 
 import net.runelite.api.Client;
 import net.runelite.api.NPC;
@@ -12,14 +29,6 @@ import net.runelite.client.ui.overlay.Overlay;
 import net.runelite.client.ui.overlay.OverlayLayer;
 import net.runelite.client.ui.overlay.OverlayPosition;
 import net.runelite.client.ui.overlay.OverlayUtil;
-
-import java.time.*;
-import java.util.*;
-
-
-import javax.inject.Inject;
-import java.awt.*;
-import java.util.List;
 
 public class WealthyCitizenOverlay extends Overlay {
     private final Client client;
@@ -148,8 +157,3 @@ public class WealthyCitizenOverlay extends Overlay {
     }
 
     }
-
-
-
-
-

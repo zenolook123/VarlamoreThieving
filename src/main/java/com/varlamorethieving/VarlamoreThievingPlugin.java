@@ -1,7 +1,8 @@
-package com.example;
-import com.example.overlay.HouseOverlay;
-import com.example.overlay.WealthyCitizenOverlay;
+package com.varlamorethieving;
 import com.google.inject.Provides;
+import com.varlamorethieving.overlay.HouseOverlay;
+import com.varlamorethieving.overlay.WealthyCitizenOverlay;
+
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;

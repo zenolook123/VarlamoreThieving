@@ -1,4 +1,4 @@
-package com.example.overlay;
+package com.varlamorethieving.overlay;
 
 import lombok.Setter;
 import net.runelite.api.*;
@@ -126,4 +126,3 @@ public class HouseOverlay extends Overlay {
         }
     }
 }
-

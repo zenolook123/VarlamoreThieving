@@ -1,4 +1,6 @@
-package com.example;
+package com.varlamorethieving;
+
+import com.varlamorethieving.VarlamoreThievingPlugin;
 
 import net.runelite.client.RuneLite;
 import net.runelite.client.externalplugins.ExternalPluginManager;
