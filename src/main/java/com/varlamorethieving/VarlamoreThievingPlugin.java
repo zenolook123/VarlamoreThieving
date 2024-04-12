@@ -1,23 +1,25 @@
-package com.example;
-import com.example.overlay.HouseOverlay;
-import com.example.overlay.WealthyCitizenOverlay;
-import com.google.inject.Provides;
-import javax.inject.Inject;
-import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.*;
+package com.varlamorethieving;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
+import javax.inject.Inject;
+
+import com.google.inject.Provides;
+import com.varlamorethieving.overlay.HouseOverlay;
+import com.varlamorethieving.overlay.WealthyCitizenOverlay;
+
+import lombok.extern.slf4j.Slf4j;
+import net.runelite.api.ChatMessageType;
+import net.runelite.api.Client;
+import net.runelite.api.NPC;
 import net.runelite.api.events.ChatMessage;
-import net.runelite.client.config.ConfigManager;
 import net.runelite.client.Notifier;
+import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.ui.overlay.OverlayManager;
-
-import java.awt.*;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @PluginDescriptor(

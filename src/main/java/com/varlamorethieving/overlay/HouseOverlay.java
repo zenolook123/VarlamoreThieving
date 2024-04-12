@@ -1,14 +1,26 @@
-package com.example.overlay;
+package com.varlamorethieving.overlay;
+
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics2D;
+import java.awt.Shape;
+
+import javax.inject.Inject;
 
 import lombok.Setter;
-import net.runelite.api.*;
+import net.runelite.api.Client;
+import net.runelite.api.Constants;
+import net.runelite.api.ObjectComposition;
+import net.runelite.api.Perspective;
 import net.runelite.api.Point;
+import net.runelite.api.Tile;
+import net.runelite.api.WallObject;
 import net.runelite.client.ui.overlay.Overlay;
 import net.runelite.client.ui.overlay.OverlayLayer;
 import net.runelite.client.ui.overlay.OverlayPosition;
-
-import javax.inject.Inject;
-import java.awt.*;
 
 public class HouseOverlay extends Overlay {
     private static final int DOOR_BEFORE_ID = 51999;
@@ -126,4 +138,3 @@ public class HouseOverlay extends Overlay {
         }
     }
 }
-
